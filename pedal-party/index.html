@@ -1,0 +1,553 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pedal Party | Little Rock's Social Bike Ride — Every Monday</title>
+<meta name="description" content="Little Rock's biggest, chillest social bike ride. Every Monday, April to Halloween — all ages, all bikes, ~5 easy miles. See this week's ride plan.">
+<meta property="og:title" content="Pedal Party | Little Rock's Social Bike Ride — Every Monday">
+<meta property="og:description" content="Little Rock's biggest, chillest social bike ride. Every Monday, April to Halloween — all ages, all bikes, ~5 easy miles.">
+<meta property="og:image" content="assets/og-card.jpg">
+<meta property="og:type" content="website">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="42" fill="none" stroke="%235f13a9" stroke-width="10"/><circle cx="50" cy="50" r="8" fill="%23bc1184"/><path d="M50 50 L50 12 M50 50 L83 69 M50 50 L17 69" stroke="%23e18b12" stroke-width="6"/></svg>'>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<!-- Reusable SVG defs: rainbow wheel mark -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="pp-rainbow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"  stop-color="#5f13a9"/>
+      <stop offset="18%" stop-color="#bc1184"/>
+      <stop offset="36%" stop-color="#e01226"/>
+      <stop offset="54%" stop-color="#e18b12"/>
+      <stop offset="70%" stop-color="#e1c718"/>
+      <stop offset="85%" stop-color="#33b754"/>
+      <stop offset="100%" stop-color="#428fe1"/>
+    </linearGradient>
+    <symbol id="wheel-mark" viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="43" fill="none" stroke="url(#pp-rainbow)" stroke-width="9"/>
+      <circle cx="50" cy="50" r="34" fill="none" stroke="url(#pp-rainbow)" stroke-width="2.5" opacity=".7"/>
+      <g stroke="url(#pp-rainbow)" stroke-width="3">
+        <path d="M50 50 L50 9"/><path d="M50 50 L85.5 29.5"/><path d="M50 50 L85.5 70.5"/>
+        <path d="M50 50 L50 91"/><path d="M50 50 L14.5 70.5"/><path d="M50 50 L14.5 29.5"/>
+        <path d="M50 50 L70.5 14.5" opacity=".6"/><path d="M50 50 L29.5 85.5" opacity=".6"/>
+        <path d="M50 50 L29.5 14.5" opacity=".6"/><path d="M50 50 L70.5 85.5" opacity=".6"/>
+      </g>
+      <circle cx="50" cy="50" r="9" fill="#5f13a9"/>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- ════════════════════════════════════════════════════════════════
+     SECTION 1 · SiteHeader
+     Framer note: transparent over hero; gains .is-stuck (purple bar,
+     slide-down) once scrolled past the hero.
+     ════════════════════════════════════════════════════════════════ -->
+<header class="site-header" data-header>
+  <a class="header-logo" href="#top" aria-label="Pedal Party — back to top">
+    <svg class="header-wheel" data-header-wheel width="40" height="40"><use href="#wheel-mark"/></svg>
+    <span class="header-wordmark">Pedal&nbsp;Party</span>
+  </a>
+  <div class="header-right">
+    <a class="header-email" href="mailto:hello@pedalpartylr.com">hello@pedalpartylr.com</a>
+    <button class="hamburger" data-hamburger aria-label="Open menu" aria-expanded="false" aria-controls="nav-panel">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="nav-backdrop" data-nav-backdrop></div>
+<nav id="nav-panel" class="nav-panel" data-nav-panel aria-hidden="true">
+  <button class="nav-close" data-nav-close aria-label="Close menu">×</button>
+  <ul class="nav-links">
+    <li><a href="#next-ride" style="--hov:#e01226">Next Ride</a></li>
+    <li><a href="#about"     style="--hov:#e18b12">About Us</a></li>
+    <li><a href="#faq"       style="--hov:#e1c718">FAQ</a></li>
+    <li><a href="#safety"    style="--hov:#33b754">Safety</a></li>
+    <li><a href="#gallery"   style="--hov:#359fb5">Gallery</a></li>
+    <li><a href="#contact"   style="--hov:#cc107e">Say Hi</a></li>
+  </ul>
+  <p class="nav-tagline">Have Fun. Ride Safe.<br>Talk to Strangers.</p>
+</nav>
+
+<main id="top">
+
+<!-- ════════════════════════════════════════════════════════════════
+     SECTION 2 · Hero  (90vh)
+     Two stacked animation layers per the Lottie contract:
+       Layer A (back)  [data-layer="scene"] — swappable environment scenes,
+                       crossfaded every ~6s. Final AE Lottie drops in here.
+       Layer B (front) [data-layer="rider"] — persistent looping cyclist.
+     Prototype implements both layers as hand-drawn SVG driven by GSAP
+     (offline-safe); each layer is one swappable node.
+     ════════════════════════════════════════════════════════════════ -->
+<section class="hero" data-hero>
+  <div class="hero-film" aria-hidden="true">
+
+    <div class="hero-layer hero-layer--scene" data-layer="scene">
+      <!-- Scene 1 · Downtown sunset -->
+      <svg class="hero-scene" data-scene="downtown" viewBox="0 0 1440 810" preserveAspectRatio="xMidYMax slice">
+        <defs>
+          <linearGradient id="sky-downtown" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#ffe9b8"/><stop offset="55%" stop-color="#ffd0a1"/><stop offset="100%" stop-color="#ffb1a6"/>
+          </linearGradient>
+        </defs>
+        <rect width="1440" height="810" fill="url(#sky-downtown)"/>
+        <circle cx="1050" cy="300" r="95" fill="#e1c718" opacity=".85"/>
+        <circle cx="1050" cy="300" r="130" fill="#e1c718" opacity=".2"/>
+        <g class="scene-cloud" fill="#fff" opacity=".8">
+          <ellipse cx="280" cy="170" rx="90" ry="26"/><ellipse cx="350" cy="150" rx="60" ry="20"/>
+        </g>
+        <g class="scene-cloud scene-cloud--b" fill="#fff" opacity=".65">
+          <ellipse cx="900" cy="120" rx="75" ry="22"/><ellipse cx="960" cy="105" rx="48" ry="16"/>
+        </g>
+        <!-- skyline -->
+        <g fill="#4b2a86">
+          <rect x="60"  y="470" width="120" height="340"/>
+          <rect x="200" y="520" width="90"  height="290"/>
+          <rect x="310" y="430" width="70"  height="380"/>
+          <polygon points="430,810 430,380 465,340 500,380 500,810"/>
+          <rect x="520" y="500" width="110" height="310"/>
+          <rect x="650" y="330" width="95"  height="480"/>
+          <rect x="672" y="295" width="51"  height="40"/>
+          <rect x="770" y="480" width="80"  height="330"/>
+          <rect x="870" y="410" width="120" height="400"/>
+          <rect x="1010" y="540" width="90" height="270"/>
+          <rect x="1120" y="450" width="105" height="360"/>
+          <rect x="1250" y="510" width="130" height="300"/>
+        </g>
+        <g fill="#e1c718" opacity=".75">
+          <rect x="82" y="500" width="10" height="14"/><rect x="120" y="540" width="10" height="14"/>
+          <rect x="675" y="360" width="9" height="12"/><rect x="700" y="410" width="9" height="12"/>
+          <rect x="905" y="450" width="10" height="13"/><rect x="945" y="500" width="10" height="13"/>
+          <rect x="1150" y="490" width="9" height="12"/><rect x="330" y="470" width="9" height="12"/>
+        </g>
+      </svg>
+
+      <!-- Scene 2 · River bridge dusk -->
+      <svg class="hero-scene" data-scene="bridge" viewBox="0 0 1440 810" preserveAspectRatio="xMidYMax slice" style="opacity:0">
+        <defs>
+          <linearGradient id="sky-bridge" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#bfeaf2"/><stop offset="60%" stop-color="#9fd4ea"/><stop offset="100%" stop-color="#cfe8f6"/>
+          </linearGradient>
+        </defs>
+        <rect width="1440" height="810" fill="url(#sky-bridge)"/>
+        <circle cx="330" cy="230" r="70" fill="#fff" opacity=".9"/>
+        <g class="scene-cloud" fill="#fff" opacity=".9">
+          <ellipse cx="1050" cy="150" rx="100" ry="28"/><ellipse cx="1130" cy="130" rx="60" ry="20"/>
+        </g>
+        <!-- river -->
+        <rect x="0" y="640" width="1440" height="170" fill="#2f6f9e"/>
+        <g stroke="#bfeaf2" stroke-width="6" stroke-linecap="round" opacity=".5">
+          <path d="M140 690 h70"/><path d="M420 720 h90"/><path d="M760 700 h60"/><path d="M1080 730 h90"/><path d="M1240 690 h50"/>
+        </g>
+        <!-- arched pedestrian bridge -->
+        <g stroke="#35286b" fill="none">
+          <path d="M80 640 Q 720 210 1360 640" stroke-width="26"/>
+          <path d="M40 610 H1400" stroke-width="20"/>
+          <g stroke-width="9">
+            <path d="M240 610 V557"/><path d="M400 610 V480"/><path d="M560 610 V424"/>
+            <path d="M720 610 V395"/><path d="M880 610 V424"/><path d="M1040 610 V480"/><path d="M1200 610 V557"/>
+          </g>
+        </g>
+        <g fill="#35286b">
+          <rect x="60" y="610" width="34" height="60"/><rect x="1346" y="610" width="34" height="60"/>
+        </g>
+      </svg>
+
+      <!-- Scene 3 · Hillcrest golden hour -->
+      <svg class="hero-scene" data-scene="hillcrest" viewBox="0 0 1440 810" preserveAspectRatio="xMidYMax slice" style="opacity:0">
+        <defs>
+          <linearGradient id="sky-hillcrest" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#e8d4ff"/><stop offset="60%" stop-color="#ffc9e2"/><stop offset="100%" stop-color="#ffe1bd"/>
+          </linearGradient>
+        </defs>
+        <rect width="1440" height="810" fill="url(#sky-hillcrest)"/>
+        <circle cx="1120" cy="250" r="80" fill="#e18b12" opacity=".8"/>
+        <g class="scene-cloud" fill="#fff" opacity=".7">
+          <ellipse cx="450" cy="140" rx="95" ry="26"/><ellipse cx="530" cy="120" rx="55" ry="18"/>
+        </g>
+        <!-- rolling hill -->
+        <path d="M0 810 L0 620 Q 360 520 720 585 T 1440 560 L1440 810 Z" fill="#3a9933"/>
+        <path d="M0 810 L0 690 Q 480 610 960 660 T 1440 640 L1440 810 Z" fill="#33b754" opacity=".85"/>
+        <!-- houses -->
+        <g>
+          <g transform="translate(240,520)">
+            <rect x="0" y="30" width="120" height="85" fill="#cc107e"/>
+            <polygon points="-12,32 60,-18 132,32" fill="#5f13a9"/>
+            <rect x="48" y="70" width="26" height="45" fill="#1a1025" opacity=".55"/>
+            <rect x="14" y="48" width="24" height="22" fill="#fff9f0"/>
+          </g>
+          <g transform="translate(640,545)">
+            <rect x="0" y="26" width="105" height="72" fill="#359fb5"/>
+            <polygon points="-10,28 52,-14 115,28" fill="#1a1025"/>
+            <rect x="40" y="58" width="24" height="40" fill="#1a1025" opacity=".5"/>
+            <rect x="12" y="42" width="20" height="18" fill="#fff9f0"/>
+          </g>
+          <g transform="translate(1010,505)">
+            <rect x="0" y="30" width="125" height="82" fill="#e18b12"/>
+            <polygon points="-12,32 62,-20 137,32" fill="#bc1184"/>
+            <rect x="52" y="66" width="26" height="46" fill="#1a1025" opacity=".5"/>
+            <rect x="16" y="48" width="24" height="20" fill="#fff9f0"/>
+          </g>
+        </g>
+        <!-- trees -->
+        <g>
+          <g transform="translate(150,560)"><rect x="-7" y="30" width="14" height="46" fill="#6b4a2f"/><circle r="42" fill="#2f8f4e"/></g>
+          <g transform="translate(880,580)"><rect x="-6" y="26" width="12" height="40" fill="#6b4a2f"/><circle r="36" fill="#3a9933"/></g>
+          <g transform="translate(1310,545)"><rect x="-7" y="30" width="14" height="44" fill="#6b4a2f"/><circle r="40" fill="#2f8f4e"/></g>
+        </g>
+      </svg>
+    </div>
+
+    <div class="hero-layer hero-layer--rider" data-layer="rider">
+      <!-- Road + persistent looping cyclist. Pedaling legs are posed each
+           frame by 2-bone IK in main.js (initHeroRider). -->
+      <svg class="hero-road-svg" viewBox="0 0 1440 810" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+        <rect x="0" y="700" width="1440" height="110" fill="#33254a"/>
+        <path data-road-dash d="M0 755 H1440" stroke="#fff9f0" stroke-width="7" stroke-dasharray="46 64" fill="none" opacity=".85"/>
+        <rect x="0" y="694" width="1440" height="8" fill="#fff9f0" opacity=".28"/>
+      </svg>
+      <svg class="hero-rider-svg" data-rider viewBox="0 0 300 220" aria-hidden="true">
+        <!-- ground shadow -->
+        <ellipse cx="150" cy="208" rx="118" ry="9" fill="#1a1025" opacity=".18"/>
+        <!-- rear wheel -->
+        <g data-wheel="rear">
+          <circle cx="78" cy="160" r="46" fill="none" stroke="#1a1025" stroke-width="9"/>
+          <g data-spokes transform-origin="78 160">
+            <path d="M78 118 V202 M36 160 H120 M48.3 130.3 L107.7 189.7 M107.7 130.3 L48.3 189.7" stroke="#fff9f0" stroke-width="3.5"/>
+          </g>
+          <circle cx="78" cy="160" r="7" fill="#5f13a9"/>
+        </g>
+        <!-- front wheel -->
+        <g data-wheel="front">
+          <circle cx="228" cy="160" r="46" fill="none" stroke="#1a1025" stroke-width="9"/>
+          <g data-spokes transform-origin="228 160">
+            <path d="M228 118 V202 M186 160 H270 M198.3 130.3 L257.7 189.7 M257.7 130.3 L198.3 189.7" stroke="#fff9f0" stroke-width="3.5"/>
+          </g>
+          <circle cx="228" cy="160" r="7" fill="#5f13a9"/>
+        </g>
+        <!-- frame -->
+        <g stroke="#5f13a9" stroke-width="9" stroke-linecap="round" fill="none">
+          <path d="M78 160 L150 160"/><path d="M150 160 L124 96"/><path d="M78 160 L124 96"/>
+          <path d="M150 160 L206 99"/><path d="M124 96 L196 96"/><path d="M206 99 L228 160"/>
+        </g>
+        <path d="M104 92 L136 92" stroke="#1a1025" stroke-width="10" stroke-linecap="round"/>
+        <path d="M206 99 L212 82 L228 78" stroke="#1a1025" stroke-width="8" stroke-linecap="round" fill="none"/>
+        <!-- handlebar streamers (trail behind the ride) -->
+        <g data-streamers stroke-width="3.5" stroke-linecap="round" fill="none">
+          <path d="M232 76 q-10 -14 -24 -16" stroke="#e01226"/>
+          <path d="M232 76 q-4 -17 -15 -24" stroke="#e1c718"/>
+          <path d="M232 76 q3 -18 -5 -28" stroke="#428fe1"/>
+        </g>
+        <!-- crank + pedals (rotated in JS) -->
+        <g data-crank transform-origin="150 160">
+          <path d="M150 138 L150 182" stroke="#1a1025" stroke-width="7" stroke-linecap="round"/>
+          <rect x="138" y="131" width="24" height="8" rx="4" fill="#1a1025"/>
+          <rect x="138" y="179" width="24" height="8" rx="4" fill="#1a1025"/>
+        </g>
+        <!-- legs: 4 line segs posed by IK -->
+        <g stroke-linecap="round" fill="none">
+          <path data-leg="far-thigh"  stroke="#12203a" stroke-width="12" opacity=".55"/>
+          <path data-leg="far-shin"   stroke="#12203a" stroke-width="10" opacity=".55"/>
+          <path data-leg="near-thigh" stroke="#1a3a5f" stroke-width="13"/>
+          <path data-leg="near-shin"  stroke="#1a3a5f" stroke-width="11"/>
+        </g>
+        <!-- rider body -->
+        <g>
+          <path d="M118 92 Q 148 58 178 62" stroke="#359fb5" stroke-width="16" stroke-linecap="round" fill="none"/>
+          <path d="M172 66 L208 84" stroke="#e8b48a" stroke-width="9" stroke-linecap="round"/>
+          <circle cx="192" cy="44" r="15" fill="#e8b48a"/>
+          <path d="M176 42 A 16 16 0 0 1 208 42 L208 45 L176 45 Z" fill="#cc107e"/>
+          <path d="M206 45 L214 47 L206 50 Z" fill="#cc107e"/>
+          <path d="M180 36 L192 29 M192 29 L203 36" stroke="#fff9f0" stroke-width="2.5" stroke-linecap="round"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+
+  <!-- floating snapshot photos -->
+  <figure class="hero-photo hero-photo--1" data-hero-photo><img src="assets/hero-float-1.jpg" alt="Snapshot from a Pedal Party ride"></figure>
+  <figure class="hero-photo hero-photo--2" data-hero-photo><img src="assets/hero-float-2.jpg" alt="Riders gathering before a Pedal Party ride"></figure>
+  <figure class="hero-photo hero-photo--3" data-hero-photo><img src="assets/hero-float-3.jpg" alt="A decorated bike at Pedal Party"></figure>
+
+  <div class="hero-copy">
+    <span class="sticker hero-sticker" data-hero-sticker>★ EVERY MONDAY · APR–OCT ★</span>
+    <h1 class="hero-title" data-hero-title>Pedal Party</h1>
+    <p class="hero-sub" data-hero-sub>Little Rock's raddest, chillest, most epic, least&nbsp;hyperbolic Monday <strong>social&nbsp;ride</strong>.</p>
+    <div class="hero-ctas" data-hero-ctas>
+      <a class="btn btn--primary" href="#next-ride">Next Ride →</a>
+      <a class="btn btn--ghost" href="#about">Learn More</a>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════
+     SECTION 3 · Word Marquee (divider)
+     ════════════════════════════════════════════════════════════════ -->
+<div class="marquee" data-marquee aria-hidden="true">
+  <div class="marquee-track" data-marquee-track>
+    <!-- word list duplicated in JS for a seamless loop -->
+    <div class="marquee-group" data-marquee-group>
+      <span class="mq-word" style="--c:#e01226">BIKE</span><span class="mq-star">★</span>
+      <span class="mq-word" style="--c:#359fb5">FUN</span><span class="mq-star">★</span>
+      <span class="mq-word" style="--c:#e18b12">COMMUNITY</span><span class="mq-star">★</span>
+      <span class="mq-word" style="--c:#3813d5">DIVERSITY</span><span class="mq-star">★</span>
+      <span class="mq-word" style="--c:#e1c718">BEER</span><span class="mq-star">★</span>
+      <span class="mq-word" style="--c:#bc1184">FRIENDS</span><span class="mq-star">★</span>
+      <span class="mq-word" style="--c:#33b754">GUD VIBES</span><span class="mq-star">★</span>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════
+     SECTION 4 · Next Ride — THE feature section.
+     Content rendered into [data-ride-stage] by js/main.js from the
+     state machine in js/rideState.js (LIVE / COUNTDOWN / NO_RIDE /
+     WEATHER_CANCEL / OFF_SEASON).
+     Dev preview: append ?state=live|countdown|no_ride|weather_cancel|off_season
+     ════════════════════════════════════════════════════════════════ -->
+<section id="next-ride" class="next-ride">
+  <div class="section-inner">
+    <div class="section-head">
+      <h2 class="section-title">Next <span class="tilt-word" style="--c:#cc107e">Ride</span></h2>
+      <p class="section-sub">The plan drops right here (and on our socials) every Saturday at noon.</p>
+    </div>
+    <div class="ride-stage" data-ride-stage aria-live="polite">
+      <p class="ride-loading">Checking this week's plan…</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════
+     SECTION 5 · About Us  (purple field)
+     ════════════════════════════════════════════════════════════════ -->
+<section id="about" class="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-copy">
+        <h2 class="section-title section-title--onpurple">It's just like riding&nbsp;a&nbsp;bike.</h2>
+        <p>Pedal Party is an inclusive, family-friendly bicycle crawl rolling through Little Rock every Monday, April Fools' to Halloween. Each week we explore different restaurants, parks, and hidden gems around downtown, Argenta, Hillcrest, and beyond.</p>
+        <p>The plan drops on social media every Saturday morning. We gather at 6:00 PM Monday and roll out at 6:30. Along the way you'll see every kind of bike, hear great music, and ride with people of all ages — we've had riders from age 4 to 104. Babies in trailers and pups in baskets are regulars.</p>
+        <p>The pace is chill: about 9 miles per hour, around 5 miles total, never far from the start. Big hill? We wait at the top. We hang at the midpoint for about 45 minutes, then cruise back. Need to dip early? Hakuna matata — do your thing.</p>
+        <p>Pedal Party started in 2022 when three buddies wanted an excuse to casually ride bikes and show Little Rock a little more cycling love. We've grown from 15 riders at our very first ride to a record 185 at our 100th. We're endlessly grateful for this community and how much Little Rock has embraced it.</p>
+        <p class="about-cta-line">If this sounds like your vibe — <a href="#next-ride">come ride with us</a>.</p>
+      </div>
+      <div class="about-stats" data-stats>
+        <div class="stat-card" style="--bg:#e01226; --rot:-2.5deg"><span class="stat-num" data-count="2022">2022</span><span class="stat-label">Rolling since</span></div>
+        <div class="stat-card" style="--bg:#359fb5; --rot:1.8deg"><span class="stat-num">15&nbsp;→&nbsp;185</span><span class="stat-label">First ride → record ride</span></div>
+        <div class="stat-card" style="--bg:#e18b12; --rot:-1.6deg"><span class="stat-num">4–104</span><span class="stat-label">Rider ages</span></div>
+        <div class="stat-card" style="--bg:#bc1184; --rot:2.4deg"><span class="stat-num"><span data-count="9">9</span>&nbsp;mph</span><span class="stat-label">Average speed</span></div>
+        <div class="stat-card" style="--bg:#33b754; --rot:-2.2deg"><span class="stat-num"><span data-count="5">5</span>&nbsp;mi</span><span class="stat-label">Average distance</span></div>
+        <div class="stat-card" style="--bg:#e1c718; --ink:#1a1025; --rot:1.5deg"><span class="stat-num"><span data-count="45">45</span>&nbsp;min</span><span class="stat-label">Midpoint hangout</span></div>
+      </div>
+    </div>
+    <p class="tagline-signoff" data-tagline>
+      <span style="--c:#e1c718">Have Fun.</span>
+      <span style="--c:#33b754">Ride Safe.</span>
+      <span style="--c:#ffb1d9">Talk to Strangers.</span>
+    </p>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════
+     SECTION 6 · FAQ
+     ════════════════════════════════════════════════════════════════ -->
+<section id="faq" class="faq">
+  <div class="section-inner section-inner--narrow">
+    <div class="section-head">
+      <h2 class="section-title">Good <span class="tilt-word" style="--c:#428fe1">Questions</span></h2>
+      <p class="section-sub">Everything first-timers ask us, answered straight.</p>
+    </div>
+    <div class="faq-list" data-faq>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false"><span>When and where do you meet?</span><span class="faq-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner"><p>Every Monday, April Fools' Day through Halloween. We gather at 6:00 PM and roll out at 6:30. The location changes weekly — the plan is posted every Saturday at noon, right here and on our socials.</p></div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false"><span>Do I need a fancy bike?</span><span class="faq-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner"><p>Nope. Road bikes, cruisers, BMX, e-bikes, tandems, kids' bikes, that dusty one in your garage — all bikes belong at Pedal Party.</p></div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false"><span>How fast and how far do you ride?</span><span class="faq-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner"><p>Relaxed. We average about 9 mph and around 5 miles total, and the route never strays far from the start. If there's a big hill, we wait at the top. Walking your bike up is always fine.</p></div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false"><span>Can I bring my kids? My dog?</span><span class="faq-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner"><p>Absolutely. We're family-friendly with riders from age 4 to 104. Babies in trailers and pets in baskets are a Pedal Party tradition.</p></div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false"><span>What if I can't stay the whole time?</span><span class="faq-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner"><p>Hakuna matata — leave whenever you need to. The route loops close to the start, so dipping out early is easy.</p></div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false"><span>Does it cost anything?</span><span class="faq-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner"><p>Riding with us is free. Bring money if you want food or drinks at the stops.</p></div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false"><span>What happens if the weather's bad?</span><span class="faq-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner"><p>If a ride gets rained out, we'll post the cancellation here and on socials. When in doubt, check the Next Ride section.</p></div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false"><span>I'm new and nervous. Is this for me?</span><span class="faq-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner"><p>Especially you. Pedal Party exists so that riding around Little Rock feels easy, social, and safe. Show up, say hi, talk to strangers.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════
+     SECTION 7 · Safety — Do / Don't
+     ════════════════════════════════════════════════════════════════ -->
+<section id="safety" class="safety">
+  <div class="section-inner">
+    <div class="section-head">
+      <h2 class="section-title">Ride <span class="tilt-word" style="--c:#33b754">Smart</span></h2>
+      <p class="section-sub">Chill pace, real streets. Here's how we all get home grinning.</p>
+    </div>
+    <div class="safety-grid">
+      <div class="safety-card safety-card--do" data-safety-card>
+        <h3 class="safety-heading"><span class="safety-mark">✓</span> DO</h3>
+        <ul>
+          <li>Wear a helmet — encouraged for everyone, strongly for kids</li>
+          <li>Bring lights (rides end around sunset)</li>
+          <li>Bring water, especially in summer</li>
+          <li>Follow the leader and stay with the group</li>
+          <li>Call out hazards for riders behind you ("hole!", "car back!")</li>
+          <li>Check your tires and brakes before you roll</li>
+          <li>Talk to strangers — that's the whole point</li>
+        </ul>
+      </div>
+      <div class="safety-card safety-card--dont" data-safety-card>
+        <h3 class="safety-heading"><span class="safety-mark">✕</span> DON'T</h3>
+        <ul>
+          <li>Don't blow through intersections — we ride legal and predictable</li>
+          <li>Don't ride ahead of the ride leader</li>
+          <li>Don't overdo it at the stops — know your limits, ride home safe</li>
+          <li>Don't leave anyone behind — if someone's struggling, flag a volunteer</li>
+          <li>Don't stress about being fast — nobody's timing you</li>
+        </ul>
+      </div>
+    </div>
+    <p class="safety-note">🔧 Volunteers with tools ride along to help with flats and minor mechanicals. We've got you.</p>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════
+     SECTION 8 · Gallery — photos injected from GALLERY_PHOTOS array
+     in js/main.js (single swappable list).
+     ════════════════════════════════════════════════════════════════ -->
+<section id="gallery" class="gallery">
+  <div class="section-inner">
+    <div class="section-head">
+      <h2 class="section-title">Proof it's as fun as it <span class="tilt-word" style="--c:#e18b12">looks</span></h2>
+      <p class="section-sub">Snapshots from the pack. Tag us and we'll add yours.</p>
+    </div>
+    <div class="gallery-grid" data-gallery></div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════
+     SECTION 9 · Contact
+     ════════════════════════════════════════════════════════════════ -->
+<section id="contact" class="contact">
+  <div class="section-inner">
+    <div class="section-head">
+      <h2 class="section-title">Say <span class="tilt-word" style="--c:#cc107e">hi</span> 👋</h2>
+      <p class="section-sub">Questions, theme ideas, sponsor talk, or just want in the loop?</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-socials">
+        <a class="social-card" href="https://instagram.com/pedalpartylr" target="_blank" rel="noopener" style="--bg:#bc1184">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.2c3.2 0 3.6 0 4.9.07 1.2.06 1.8.25 2.2.42.56.22.96.48 1.38.9.42.42.68.82.9 1.38.17.42.36 1.05.42 2.23.06 1.27.07 1.65.07 4.85s0 3.58-.07 4.85c-.06 1.18-.25 1.81-.42 2.23a3.7 3.7 0 0 1-.9 1.38 3.7 3.7 0 0 1-1.38.9c-.42.17-1.05.36-2.23.42-1.27.06-1.65.07-4.85.07s-3.58 0-4.85-.07c-1.18-.06-1.81-.25-2.23-.42a3.7 3.7 0 0 1-1.38-.9 3.7 3.7 0 0 1-.9-1.38c-.17-.42-.36-1.05-.42-2.23C2.2 15.58 2.2 15.2 2.2 12s0-3.58.07-4.85c.06-1.18.25-1.81.42-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.17 1.05-.36 2.23-.42C8.42 2.2 8.8 2.2 12 2.2m0-2.2C8.74 0 8.33 0 7.05.07 5.78.13 4.9.33 4.14.63a5.9 5.9 0 0 0-2.13 1.38A5.9 5.9 0 0 0 .63 4.14C.33 4.9.13 5.78.07 7.05 0 8.33 0 8.74 0 12s0 3.67.07 4.95c.06 1.27.26 2.15.56 2.91.31.8.72 1.48 1.38 2.13a5.9 5.9 0 0 0 2.13 1.38c.76.3 1.64.5 2.91.56C8.33 24 8.74 24 12 24s3.67 0 4.95-.07c1.27-.06 2.15-.26 2.91-.56a5.9 5.9 0 0 0 2.13-1.38 5.9 5.9 0 0 0 1.38-2.13c.3-.76.5-1.64.56-2.91.07-1.28.07-1.69.07-4.95s0-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91a5.9 5.9 0 0 0-1.38-2.13A5.9 5.9 0 0 0 19.86.63c-.76-.3-1.64-.5-2.91-.56C15.67 0 15.26 0 12 0Zm0 5.84A6.16 6.16 0 1 0 18.16 12 6.16 6.16 0 0 0 12 5.84Zm0 10.15A4 4 0 1 1 16 12a4 4 0 0 1-4 4Zm6.4-11.85a1.44 1.44 0 1 1-1.44 1.44 1.44 1.44 0 0 1 1.44-1.44Z"/></svg>
+          <span class="social-handle">@pedalpartylr</span>
+          <span class="social-net">Instagram</span>
+        </a>
+        <a class="social-card" href="https://facebook.com/pedalpartylr" target="_blank" rel="noopener" style="--bg:#428fe1">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M24 12a12 12 0 1 0-13.88 11.85v-8.38H7.08V12h3.04V9.36c0-3 1.8-4.67 4.53-4.67 1.31 0 2.69.24 2.69.24v2.95H15.8c-1.49 0-1.95.92-1.95 1.87V12h3.32l-.53 3.47h-2.79v8.38A12 12 0 0 0 24 12Z"/></svg>
+          <span class="social-handle">/pedalpartylr</span>
+          <span class="social-net">Facebook</span>
+        </a>
+        <a class="social-card social-card--mail" href="mailto:hello@pedalpartylr.com" style="--bg:#5f13a9">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M2 4h20a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1Zm10 8.5L3.5 6v12h17V6L12 12.5ZM4.9 6l7.1 5.3L19.1 6H4.9Z"/></svg>
+          <span class="social-handle">hello@pedalpartylr.com</span>
+          <span class="social-net">Email</span>
+        </a>
+      </div>
+      <form class="contact-form" data-contact-form novalidate>
+        <label class="field">
+          <span class="field-label">Name</span>
+          <input type="text" name="name" required placeholder="Your name">
+        </label>
+        <label class="field">
+          <span class="field-label">Email</span>
+          <input type="email" name="email" required placeholder="you@example.com">
+        </label>
+        <label class="field">
+          <span class="field-label">Message</span>
+          <textarea name="message" rows="5" required placeholder="Hey Pedal Party…"></textarea>
+        </label>
+        <button class="btn btn--primary btn--submit" type="submit">Send it 🚲</button>
+        <p class="form-status" data-form-status role="status"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ════════════════════════════════════════════════════════════════
+     SECTION 10 · Footer (tiny bike rides across as you scroll)
+     ════════════════════════════════════════════════════════════════ -->
+<footer class="footer">
+  <div class="footer-rainbow" aria-hidden="true"></div>
+  <div class="footer-ride" aria-hidden="true">
+    <svg class="footer-bike" data-footer-bike viewBox="0 0 120 80">
+      <g data-fwheel transform-origin="30 58"><circle cx="30" cy="58" r="18" fill="none" stroke="#fff9f0" stroke-width="4"/><path d="M30 42 V74 M14 58 H46 M19 47 L41 69 M41 47 L19 69" stroke="#fff9f0" stroke-width="1.6"/></g>
+      <g data-fwheel transform-origin="92 58"><circle cx="92" cy="58" r="18" fill="none" stroke="#fff9f0" stroke-width="4"/><path d="M92 42 V74 M76 58 H108 M81 47 L103 69 M103 47 L81 69" stroke="#fff9f0" stroke-width="1.6"/></g>
+      <g stroke="#e1c718" stroke-width="4" stroke-linecap="round" fill="none">
+        <path d="M30 58 L58 58 L48 30 L30 58"/><path d="M58 58 L82 32"/><path d="M48 30 L76 30"/><path d="M82 32 L92 58"/>
+      </g>
+      <path d="M42 27 L54 27" stroke="#fff9f0" stroke-width="5" stroke-linecap="round"/>
+      <path d="M82 32 L86 22 L94 20" stroke="#fff9f0" stroke-width="4" stroke-linecap="round" fill="none"/>
+    </svg>
+  </div>
+  <div class="footer-main">
+    <div class="footer-brand">
+      <svg class="footer-wheel" width="72" height="72"><use href="#wheel-mark"/></svg>
+      <p class="footer-tagline">Have Fun. Ride Safe.<br>Talk to Strangers.</p>
+    </div>
+    <nav class="footer-links" aria-label="Footer">
+      <a href="#next-ride">Next Ride</a>
+      <a href="#about">About Us</a>
+      <a href="#faq">FAQ</a>
+      <a href="#safety">Safety</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#contact">Say Hi</a>
+    </nav>
+    <div class="footer-social">
+      <a href="https://instagram.com/pedalpartylr" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" width="26" height="26"><path fill="currentColor" d="M12 2.2c3.2 0 3.6 0 4.9.07 1.2.06 1.8.25 2.2.42.56.22.96.48 1.38.9.42.42.68.82.9 1.38.17.42.36 1.05.42 2.23.06 1.27.07 1.65.07 4.85s0 3.58-.07 4.85c-.06 1.18-.25 1.81-.42 2.23a3.7 3.7 0 0 1-.9 1.38 3.7 3.7 0 0 1-1.38.9c-.42.17-1.05.36-2.23.42-1.27.06-1.65.07-4.85.07s-3.58 0-4.85-.07c-1.18-.06-1.81-.25-2.23-.42a3.7 3.7 0 0 1-1.38-.9 3.7 3.7 0 0 1-.9-1.38c-.17-.42-.36-1.05-.42-2.23C2.2 15.58 2.2 15.2 2.2 12s0-3.58.07-4.85c.06-1.18.25-1.81.42-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.17 1.05-.36 2.23-.42C8.42 2.2 8.8 2.2 12 2.2m0-2.2C8.74 0 8.33 0 7.05.07 5.78.13 4.9.33 4.14.63a5.9 5.9 0 0 0-2.13 1.38A5.9 5.9 0 0 0 .63 4.14C.33 4.9.13 5.78.07 7.05 0 8.33 0 8.74 0 12s0 3.67.07 4.95c.06 1.27.26 2.15.56 2.91.31.8.72 1.48 1.38 2.13a5.9 5.9 0 0 0 2.13 1.38c.76.3 1.64.5 2.91.56C8.33 24 8.74 24 12 24s3.67 0 4.95-.07c1.27-.06 2.15-.26 2.91-.56a5.9 5.9 0 0 0 2.13-1.38 5.9 5.9 0 0 0 1.38-2.13c.3-.76.5-1.64.56-2.91.07-1.28.07-1.69.07-4.95s0-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91a5.9 5.9 0 0 0-1.38-2.13A5.9 5.9 0 0 0 19.86.63c-.76-.3-1.64-.5-2.91-.56C15.67 0 15.26 0 12 0Zm0 5.84A6.16 6.16 0 1 0 18.16 12 6.16 6.16 0 0 0 12 5.84Zm0 10.15A4 4 0 1 1 16 12a4 4 0 0 1-4 4Zm6.4-11.85a1.44 1.44 0 1 1-1.44 1.44 1.44 1.44 0 0 1 1.44-1.44Z"/></svg></a>
+      <a href="https://facebook.com/pedalpartylr" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" width="26" height="26"><path fill="currentColor" d="M24 12a12 12 0 1 0-13.88 11.85v-8.38H7.08V12h3.04V9.36c0-3 1.8-4.67 4.53-4.67 1.31 0 2.69.24 2.69.24v2.95H15.8c-1.49 0-1.95.92-1.95 1.87V12h3.32l-.53 3.47h-2.79v8.38A12 12 0 0 0 24 12Z"/></svg></a>
+      <a href="mailto:hello@pedalpartylr.com" aria-label="Email"><svg viewBox="0 0 24 24" width="26" height="26"><path fill="currentColor" d="M2 4h20a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1Zm10 8.5L3.5 6v12h17V6L12 12.5ZM4.9 6l7.1 5.3L19.1 6H4.9Z"/></svg></a>
+    </div>
+  </div>
+  <p class="footer-smallprint">Pedal Party · Little Rock, AR · Every Monday, April Fools' to Halloween.</p>
+</footer>
+
+<!-- Ride readout: current "stop" + page progress (chapter readout) -->
+<div class="ride-readout" data-readout aria-hidden="true">
+  <svg class="readout-wheel" data-readout-wheel width="18" height="18"><use href="#wheel-mark"/></svg>
+  <span class="readout-label" data-readout-label>ROLL OUT</span>
+  <span class="readout-bar"><i data-readout-bar></i></span>
+</div>
+
+<div class="grain" aria-hidden="true"></div>
+
+<script src="vendor/gsap.min.js"></script>
+<script src="vendor/ScrollTrigger.min.js"></script>
+<script src="vendor/lenis.min.js"></script>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
