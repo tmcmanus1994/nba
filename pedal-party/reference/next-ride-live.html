@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Next Ride card — LIVE state</title>
+<link rel="stylesheet" href="../css/styles.css">
+<style>
+  /* reference-only chrome */
+  body { padding: 2rem clamp(1rem,4vw,3rem) 4rem; }
+  .ref-note { font-family: var(--font-body); font-weight: 600; background: var(--pp-ink); color: var(--pp-cream);
+              border-radius: 12px; padding: .8rem 1.2rem; margin: 0 auto 2rem; max-width: 1180px; }
+  .ref-note code { color: var(--pp-yellow); }
+</style>
+</head>
+<body>
+<p class="ref-note">Reference snapshot · <code>LIVE</code> — scheduled ride, shown Sat 12:00 PM → Mon 11:59 PM CT.
+Live version renders this via <code>js/rideState.js</code> + <code>renderRideStage()</code>; countdown digits are frozen here.</p>
+<section id="next-ride" class="next-ride">
+  <div class="section-inner" style="padding-top:1rem">
+    <div class="section-head">
+      <h2 class="section-title">Next <span class="tilt-word" style="--c:#cc107e">Ride</span></h2>
+      <p class="section-sub">The plan drops right here (and on our socials) every Saturday at noon.</p>
+    </div>
+    <div class="ride-stage">
+<div class="ride-card ride-live">
+    <div class="ride-image-wrap">
+      <span class="ride-image-tape"></span>
+      <div class="ride-image">
+        <img src="../assets/announcement-sample.jpg" alt="This week's ride announcement: Christmas in July">
+      </div>
+    </div>
+    <div class="ride-info">
+      <p class="ride-week-label label-text">This Monday's ride</p>
+      <h3 class="ride-title">Christmas in July</h3>
+      <p class="ride-hype">“Santa hats in the sunshine, jingle bells on handlebars — bring your merriest mid-summer self.”</p>
+      <div class="ride-facts"><span class="fact-pill">📍 Whole Hog BBQ</span><span class="fact-pill">🕕 Gather 6:00 PM</span><span class="fact-pill">🚲 Roll 6:30 PM</span></div>
+      
+        <p class="plan-heading">Da Plan</p>
+        <ol class="plan-timeline">
+          
+            <li class="plan-step">
+              <span class="plan-dot" style="--dot:#e01226">1</span>
+              <span class="plan-text">Gather at Whole Hog BBQ — decorate your bike, meet the pack</span>
+            </li>
+            <li class="plan-step">
+              <span class="plan-dot" style="--dot:#359fb5">2</span>
+              <span class="plan-text">Roll out along the river trail with holiday tunes</span>
+            </li>
+            <li class="plan-step">
+              <span class="plan-dot" style="--dot:#e18b12">3</span>
+              <span class="plan-text">Midpoint hang: BBQ, cold drinks &amp; a very July Christmas</span>
+            </li>
+            <li class="plan-step">
+              <span class="plan-dot" style="--dot:#5f13a9">4</span>
+              <span class="plan-text">Cruise back nice and easy before sunset</span>
+            </li>
+        </ol>
+      
+        <div class="heads-up"><strong>⚠️ Heads up</strong>It's July in Arkansas — hydrate like it's your job. Helmets encouraged, bring lights for the ride back.</div>
+    </div>
+  </div>
+    </div>
+  </div>
+</section>
+</body>
+</html>

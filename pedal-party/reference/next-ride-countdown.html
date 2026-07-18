@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Next Ride card — COUNTDOWN state</title>
+<link rel="stylesheet" href="../css/styles.css">
+<style>
+  /* reference-only chrome */
+  body { padding: 2rem clamp(1rem,4vw,3rem) 4rem; }
+  .ref-note { font-family: var(--font-body); font-weight: 600; background: var(--pp-ink); color: var(--pp-cream);
+              border-radius: 12px; padding: .8rem 1.2rem; margin: 0 auto 2rem; max-width: 1180px; }
+  .ref-note code { color: var(--pp-yellow); }
+</style>
+</head>
+<body>
+<p class="ref-note">Reference snapshot · <code>COUNTDOWN</code> — Tue → Sat noon, waiting on the next plan drop.
+Live version renders this via <code>js/rideState.js</code> + <code>renderRideStage()</code>; countdown digits are frozen here.</p>
+<section id="next-ride" class="next-ride">
+  <div class="section-inner" style="padding-top:1rem">
+    <div class="section-head">
+      <h2 class="section-title">Next <span class="tilt-word" style="--c:#cc107e">Ride</span></h2>
+      <p class="section-sub">The plan drops right here (and on our socials) every Saturday at noon.</p>
+    </div>
+    <div class="ride-stage">
+<div class="ride-card ride-message">
+    <h3 class="ride-message-title">Next ride drops <span style="color:var(--pp-pink)">Saturday at noon</span>.</h3>
+    <p class="ride-message-sub">Every Monday. Gather at 6, roll at 6:30. Location announced right here.</p>
+    
+    
+    <div class="countdown" data-countdown="" aria-label="Countdown to the next ride plan">
+      
+        <span class="cd-cell" style="--cd-bg:#5f13a9; --cd-rot:-2deg">
+          <span class="cd-num" data-cd="days">3</span>
+          <span class="cd-label">Days</span>
+        </span>
+        <span class="cd-cell" style="--cd-bg:#bc1184; --cd-rot:1.5deg">
+          <span class="cd-num" data-cd="hours">04</span>
+          <span class="cd-label">Hours</span>
+        </span>
+        <span class="cd-cell" style="--cd-bg:#e18b12; --cd-rot:-1deg">
+          <span class="cd-num" data-cd="mins">47</span>
+          <span class="cd-label">Mins</span>
+        </span>
+        <span class="cd-cell" style="--cd-bg:#359fb5; --cd-rot:2deg">
+          <span class="cd-num" data-cd="secs">59</span>
+          <span class="cd-label">Secs</span>
+        </span>
+    </div>
+    
+  </div>
+    </div>
+  </div>
+</section>
+</body>
+</html>
