@@ -55,31 +55,31 @@ function initAnchors() {
   });
 }
 
-/* ════════ SECTION 1 · SiteHeader + slide-in nav ════════ */
+/* ════════ SECTION 1 · SiteHeader + sticker-stack dropdown menu ════════ */
 const headerEl = document.querySelector("[data-header]");
-const navPanel = document.querySelector("[data-nav-panel]");
-const navBackdrop = document.querySelector("[data-nav-backdrop]");
-const hamburger = document.querySelector("[data-hamburger]");
+const menuWrap = document.querySelector("[data-menu-wrap]");
+const menuBtn = document.querySelector("[data-menu-btn]");
+const menuDropdown = document.querySelector("[data-menu-dropdown]");
 
 function openNav() {
-  navPanel.classList.add("is-open");
-  navBackdrop.classList.add("is-open");
-  navPanel.setAttribute("aria-hidden", "false");
-  hamburger.setAttribute("aria-expanded", "true");
-  navPanel.querySelector(".nav-close").focus();
+  menuDropdown.classList.remove("is-closing");
+  menuDropdown.classList.add("is-open");
+  menuDropdown.setAttribute("aria-hidden", "false");
+  menuBtn.setAttribute("aria-expanded", "true");
 }
 function closeNav() {
-  if (!navPanel.classList.contains("is-open")) return;
-  navPanel.classList.remove("is-open");
-  navBackdrop.classList.remove("is-open");
-  navPanel.setAttribute("aria-hidden", "true");
-  hamburger.setAttribute("aria-expanded", "false");
-  hamburger.focus();
+  if (!menuDropdown.classList.contains("is-open")) return;
+  menuDropdown.classList.remove("is-open");
+  menuDropdown.classList.add("is-closing");
+  menuDropdown.setAttribute("aria-hidden", "true");
+  menuBtn.setAttribute("aria-expanded", "false");
+  setTimeout(() => menuDropdown.classList.remove("is-closing"), 380);
 }
 function initHeader() {
-  hamburger.addEventListener("click", openNav);
-  navPanel.querySelector("[data-nav-close]").addEventListener("click", closeNav);
-  navBackdrop.addEventListener("click", closeNav);
+  menuBtn.addEventListener("click", () =>
+    menuDropdown.classList.contains("is-open") ? closeNav() : openNav());
+  // click-away + Escape close the stack
+  addEventListener("click", e => { if (!menuWrap.contains(e.target)) closeNav(); });
   addEventListener("keydown", e => { if (e.key === "Escape") closeNav(); });
 
   // compact purple bar once scrolled past the hero

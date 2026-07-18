@@ -141,62 +141,75 @@ a { color: var(--pp-purple); }
 .header-right { display: flex; align-items: center; gap: 1.2rem; }
 .header-email { font-weight: 600; font-size: .95rem; color: inherit; text-decoration: none; border-bottom: 2px solid transparent; }
 .header-email:hover { border-bottom-color: var(--pp-yellow); }
-.hamburger {
-  width: 46px; height: 42px;
+/* Menu button + sticker-stack dropdown */
+.menu-wrap { position: relative; }
+.menu-btn {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.02rem;
+  letter-spacing: .02em;
+  padding: .45em 1.1em;
   border: 3px solid currentColor;
-  border-radius: 12px;
+  border-radius: 999px;
   background: transparent;
   color: inherit;
   cursor: pointer;
-  display: grid;
-  place-content: center;
-  gap: 5px;
+  display: inline-flex;
+  align-items: center;
+  gap: .4em;
   transition: transform .22s var(--spring);
 }
-.hamburger:hover { transform: rotate(-4deg) scale(1.06); }
-.hamburger span { display: block; width: 20px; height: 3px; border-radius: 2px; background: currentColor; }
-
-/* slide-in nav panel */
-.nav-backdrop {
-  position: fixed; inset: 0; z-index: 70;
-  background: rgba(26,16,37,.5);
-  opacity: 0; pointer-events: none;
-  transition: opacity .3s;
+.menu-btn:hover { transform: rotate(-2deg) scale(1.06); }
+.menu-btn-icon { display: inline-block; transition: transform .3s var(--spring); }
+.menu-btn[aria-expanded="true"] .menu-btn-icon { transform: rotate(180deg); }
+.menu-dropdown {
+  position: absolute;
+  top: calc(100% + .7rem);
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: .55rem;
+  width: max-content;          /* shrinks to the widest pill */
+  pointer-events: none;        /* enabled while open */
 }
-.nav-backdrop.is-open { opacity: 1; pointer-events: auto; }
-.nav-panel {
-  position: fixed; top: 0; right: 0; bottom: 0; z-index: 80;
-  width: min(420px, 88vw);
-  background: var(--pp-purple);
-  color: var(--pp-cream);
-  padding: 5rem 2.5rem 2.5rem;
-  transform: translateX(105%);
-  transition: transform .45s var(--spring);
-  display: flex; flex-direction: column;
-  box-shadow: -6px 0 0 rgba(26,16,37,.2);
-}
-.nav-panel.is-open { transform: translateX(0); }
-.nav-close {
-  position: absolute; top: 1rem; right: 1.2rem;
-  font-size: 2.2rem; line-height: 1;
-  background: none; border: none; color: var(--pp-cream);
-  cursor: pointer;
-  transition: transform .25s var(--spring);
-}
-.nav-close:hover { transform: rotate(90deg) scale(1.15); }
-.nav-links { list-style: none; margin: 0; padding: 0; }
-.nav-links a {
+.menu-dropdown.is-open { pointer-events: auto; }
+.menu-pill {
   display: inline-block;
+  width: fit-content;          /* each shape hugs its anchor text */
   font-family: var(--font-display);
-  font-weight: 800;
-  font-size: clamp(2rem, 5vh, 2.7rem);
-  color: var(--pp-cream);
+  font-weight: 700;
+  font-size: 1.12rem;
+  white-space: nowrap;
+  padding: .42em 1.15em;
+  background: var(--bg, var(--pp-purple));
+  color: var(--pp-white);
   text-decoration: none;
-  padding: .18em 0;
-  transition: color .18s, transform .22s var(--spring);
+  border: 3px solid var(--pp-ink);
+  border-radius: 999px;
+  box-shadow: 3.5px 3.5px 0 var(--pp-ink);
+  transform: rotate(var(--rot, 0deg));
+  opacity: 0;                  /* revealed by the stack animation */
+  transition: transform .22s var(--spring), box-shadow .22s var(--spring);
 }
-.nav-links a:hover { color: var(--hov, var(--pp-yellow)); transform: translateX(10px) rotate(-1.5deg); }
-.nav-tagline { margin-top: auto; font-family: var(--font-display); font-weight: 700; font-size: 1.15rem; color: var(--pp-yellow); }
+/* stack-in: pills drop under the Menu button one after another */
+.menu-dropdown.is-open .menu-pill {
+  animation: pill-stack-in .42s var(--spring) both;
+  animation-delay: calc(var(--i, 0) * 65ms);
+}
+.menu-dropdown.is-closing .menu-pill {
+  opacity: 1;
+  animation: pill-stack-out .18s ease-in both;
+  animation-delay: calc((5 - var(--i, 0)) * 28ms);
+}
+@keyframes pill-stack-in {
+  from { opacity: 0; transform: translateY(-26px) scale(.7) rotate(var(--rot, 0deg)); }
+  to   { opacity: 1; transform: translateY(0)     scale(1)  rotate(var(--rot, 0deg)); }
+}
+@keyframes pill-stack-out {
+  to { opacity: 0; transform: translateY(-14px) scale(.85) rotate(var(--rot, 0deg)); }
+}
+.menu-pill:hover { transform: rotate(0deg) translate(-2px,-2px) scale(1.05); box-shadow: 5.5px 5.5px 0 var(--pp-ink); animation: none; opacity: 1; }
 
 /* ════════ SECTION 2 · Hero ════════ */
 .hero {

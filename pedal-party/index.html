@@ -52,25 +52,23 @@
   </a>
   <div class="header-right">
     <a class="header-email" href="mailto:hello@pedalpartylr.com">hello@pedalpartylr.com</a>
-    <button class="hamburger" data-hamburger aria-label="Open menu" aria-expanded="false" aria-controls="nav-panel">
-      <span></span><span></span><span></span>
-    </button>
+    <div class="menu-wrap" data-menu-wrap>
+      <button class="menu-btn" data-menu-btn aria-expanded="false" aria-controls="menu-dropdown">
+        Menu <span class="menu-btn-icon" aria-hidden="true">▾</span>
+      </button>
+      <!-- Sticker-stack dropdown: each link is a pill sized to its text,
+           stacking in under the Menu button on click. -->
+      <nav id="menu-dropdown" class="menu-dropdown" data-menu-dropdown aria-hidden="true">
+        <a class="menu-pill" href="#next-ride" style="--bg:#e01226; --rot:-2deg;   --i:0">Next Ride</a>
+        <a class="menu-pill" href="#about"     style="--bg:#359fb5; --rot:1.5deg;  --i:1">About Us</a>
+        <a class="menu-pill" href="#faq"       style="--bg:#e18b12; --rot:-1.5deg; --i:2">FAQ</a>
+        <a class="menu-pill" href="#safety"    style="--bg:#33b754; --rot:2deg;    --i:3">Safety</a>
+        <a class="menu-pill" href="#gallery"   style="--bg:#428fe1; --rot:-2.5deg; --i:4">Gallery</a>
+        <a class="menu-pill" href="#contact"   style="--bg:#cc107e; --rot:1.5deg;  --i:5">Say Hi</a>
+      </nav>
+    </div>
   </div>
 </header>
-
-<div class="nav-backdrop" data-nav-backdrop></div>
-<nav id="nav-panel" class="nav-panel" data-nav-panel aria-hidden="true">
-  <button class="nav-close" data-nav-close aria-label="Close menu">×</button>
-  <ul class="nav-links">
-    <li><a href="#next-ride" style="--hov:#e01226">Next Ride</a></li>
-    <li><a href="#about"     style="--hov:#e18b12">About Us</a></li>
-    <li><a href="#faq"       style="--hov:#e1c718">FAQ</a></li>
-    <li><a href="#safety"    style="--hov:#33b754">Safety</a></li>
-    <li><a href="#gallery"   style="--hov:#359fb5">Gallery</a></li>
-    <li><a href="#contact"   style="--hov:#cc107e">Say Hi</a></li>
-  </ul>
-  <p class="nav-tagline">Have Fun. Ride Safe.<br>Talk to Strangers.</p>
-</nav>
 
 <main id="top">
 
